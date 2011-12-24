@@ -4,15 +4,6 @@
  * Website: http://about.me/nikiliu
  */
 
-// Get the root node of the page
-var rootNode = document.all[0];
-
-// The new page structure will be stored in this
-var mappedNodes = '';
-
-// Map all the nodes in the root node recursively
-mapNodes(rootNode);
-
 /*
  * This function displays a node's tagName in a div
  * and repeats the process for every child element
@@ -20,37 +11,40 @@ mapNodes(rootNode);
  * every child node of the given node.
  */
 function mapNodes(node) {
-    // Prevent text nodes from being processed
-    if (node.tagName != undefined) {
-        // Add an attributes div if the node has attributes
-        if (node.attributes.length > 0) {
-            var nodeAttributes = '';
-            for (var i = 0; i < node.attributes.length; i++) {
-                nodeAttributes += '<p>' + node.attributes[i].name + ': ' +
-                                  node.attributes[i].value + '</p>';
-            }
-            mappedNodes += '<div class="node">' + node.tagName +
-                           '<div class="attributes">' + nodeAttributes + '</div>' +
-                           '</div>';
-        } else {
-            mappedNodes += '<div class="node">' + node.tagName + '</div>';
+    // Store each node's information
+    var mappedNodes = '<li><div class="node">' + node.tagName;
+
+    // Add an attributes div if the node has attributes
+    if (node.attributes.length > 0) {
+        var nodeAttributes = '';
+        for (var i = 0; i < node.attributes.length; i++) {
+            nodeAttributes += '<p>' + node.attributes[i].name + ': ' +
+                                      node.attributes[i].value + '</p>';
         }
+        mappedNodes += '<div class="attributes">' + nodeAttributes + '</div>';
     }
+    mappedNodes += '</div>';
     
     // Run the function again for every child node
-    if (node.childNodes.length > 0) {
+    if (node.childNodes.length > 1) { // This is 1 to ignore text nodes
         mappedNodes += '<ul class="nodemap">';
         for (var i = 0; i < node.childNodes.length; i++) {
-            mappedNodes += '<li>';
-            mapNodes(node.childNodes[i]);
-            mappedNodes += '</li>';
+            if (node.childNodes[i].tagName != undefined) { // Ignore text nodes
+                mappedNodes += mapNodes(node.childNodes[i]);
+            }
         }
         mappedNodes += '</ul>';
     }
+    return mappedNodes += '</li>';
 }
 
-// Clear the page's <head> tag to prevent stylesheet conflicts
-document.head.innerHTML = '';
+// Create the node map
+var rootNode = document.all[0];
+var nodeMap = document.createElement('ul');
+nodeMap.setAttribute('class', 'nodemap');
+nodeMap.innerHTML = mapNodes(rootNode);
 
-// Display the entire node map
-document.body.innerHTML = '<ul class="nodemap"><li>' + mappedNodes + '</li></ul>';
+// Clear the page's <head> and <body> and display the node map
+document.head.innerHTML = '';
+document.body.innerHTML = '';
+document.body.appendChild(nodeMap);
