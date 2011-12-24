@@ -12,23 +12,62 @@ body {
     font-weight: bold;
     color: #000;
 }
+p {
+    margin: 0;
+    padding: 0;
+}
 ul.nodemap {
     list-style: none;
     display: table-row;
 }
-ul.nodemap > li {
-    display: table-cell;
-    vertical-align: top;
-    padding: 2em 1em;
-}
+    ul.nodemap > li {
+        display: table-cell;
+        vertical-align: top;
+        padding: 2em 1em;
+    }
+
 .node {
-    background: #000;
+    background: #555;
     text-align: center;
     font-size: 1.3em;
     color: #fff;
     width: 5em;
     height: 3em;
+    position: relative;
     margin: 0 auto;
     padding-top: 2em;
     border-radius: 9999px;
+}
+    .node > .attributes {
+        background: #000;
+        text-align: left;
+        white-space: nowrap;
+        color: #fff;
+        visibility: hidden;
+        position: absolute;
+        z-index: 1000;
+        left: 2em;
+        top: 4em;
+        padding: 10px;
+        border: 2px solid #000;
+    }
+    .node > .attributes:before,
+    .node > .attributes:after {
+        content: "";
+        position: absolute;
+        z-index: 1000;
+        top: -8px;
+        left: 0%;
+        border-top: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid #000;
+    }
+
+.node:hover {
+    background: #ff7800;
+    cursor: pointer;
+}
+.node:hover > .attributes {
+    visibility: visible;
 }
