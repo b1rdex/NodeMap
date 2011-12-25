@@ -3,7 +3,7 @@
 NodeMap is a Google Chrome extension that maps a page's DOM
 structure in a graphical interface.
 
-![Screenshot](https://github.com/nikiliu/NodeMap/blob/master/demo/screenshot.png)
+![Screenshot](https://github.com/nikiliu/NodeMap/raw/master/demo/screenshot.png)
 
 ------------------------
 
