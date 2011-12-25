@@ -4,7 +4,6 @@ structure in a graphical interface.
 -------------------------------------------------------------
 
 Next steps:
-    - Draw lines between nodes
     - Add controls to resize the entire node map
 
 How to use:
