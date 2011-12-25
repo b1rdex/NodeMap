@@ -26,7 +26,7 @@ function mapNodes(node) {
     mappedNodes += '</div>';
     
     // Run the function again for every child node
-    if (node.childNodes.length > 1) { // Set to 1 to ignore text nodes
+    if (node.childNodes.length > 0) {
         mappedNodes += '<ul class="nodemap">';
         for (var i = 0; i < node.childNodes.length; i++) {
             if (node.childNodes[i].tagName != undefined) { // Ignore text nodes
