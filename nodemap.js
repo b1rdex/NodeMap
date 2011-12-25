@@ -18,8 +18,8 @@ function mapNodes(node) {
     if (node.attributes.length > 0) {
         var nodeAttributes = '';
         for (var i = 0; i < node.attributes.length; i++) {
-            nodeAttributes += '<p>' + node.attributes[i].name + ': ' +
-                                      node.attributes[i].value + '</p>';
+            var atb = node.attributes[i];
+            nodeAttributes += '<p>' + atb.name + ': ' + atb.value + '</p>';
         }
         mappedNodes += '<div class="attributes">' + nodeAttributes + '</div>';
     }
@@ -43,18 +43,21 @@ function mapNodes(node) {
  * and its child nodes on an HTML5 canvas.
  */
 function drawLines(_nodeMap, _ctx) {
-    // _nodeMap.childNodes[i] is the current list item
-    // _nodeMap.childNodes[i].childNodes[0] is the node div
-    // _nodeMap.childNodes[i].childNodes[1] is the submap, if it exists
-    setTimeout(function() { // Required for draw to work, not sure why
+    setTimeout(function() { // Required for some reason
+        // Repeat for every list item in _nodeMap
         for (var i = 0; i < _nodeMap.childNodes.length; i++) {
-            if (_nodeMap.childNodes[i].childNodes[1] != null) {
-                for (var j = 0; j < _nodeMap.childNodes[i].childNodes[1].childNodes.length; j++) {
+            if (_nodeMap.childNodes[i].childNodes[1] != null) { // Prevent null pointers
+                // Define individual elements
+                var currentListItem = _nodeMap.childNodes[i];
+                var nodeDiv = currentListItem.childNodes[0];
+                var subMap = currentListItem.childNodes[1];
+                
+                // Repeat for every child node in the submap
+                for (var j = 0; j < subMap.childNodes.length; j++) {
+                    var subNode = subMap.childNodes[j].childNodes[0];
                     _ctx.beginPath();
-                    _ctx.moveTo(_nodeMap.childNodes[i].childNodes[0].offsetLeft+32,
-                                _nodeMap.childNodes[i].childNodes[0].offsetTop+32);
-                    _ctx.lineTo(_nodeMap.childNodes[i].childNodes[1].childNodes[j].childNodes[0].offsetLeft+32,
-                                _nodeMap.childNodes[i].childNodes[1].childNodes[j].childNodes[0].offsetTop+32);
+                    _ctx.moveTo(nodeDiv.offsetLeft+32, nodeDiv.offsetTop+32);
+                    _ctx.lineTo(subNode.offsetLeft+32, subNode.offsetTop+32);
                     _ctx.stroke();
                 }
                 drawLines(_nodeMap.childNodes[i].childNodes[1], _ctx);
@@ -72,7 +75,6 @@ nodeMap.innerHTML = mapNodes(rootNode);
 // Create a canvas that draws lines connecting nodes
 var canvas = document.createElement('canvas');
 var ctx = canvas.getContext('2d');
-canvas.setAttribute('id', 'nodelines');
 
 // Clear the page's <head> and <body> and display the node map,
 // then display the canvas and node map.
@@ -82,10 +84,10 @@ document.body.appendChild(canvas);
 document.body.appendChild(nodeMap);
 
 // Set the dimensions of the canvas to match the node map's.
-// The time out is required for some strange reason.
-setTimeout(function() {
+setTimeout(function() { // Required for some reason
     canvas.width = nodeMap.offsetWidth;
     canvas.height = nodeMap.offsetHeight;
 }, 0);
 
+// Draw lines between nodes
 drawLines(nodeMap, ctx);

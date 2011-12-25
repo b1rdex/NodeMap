@@ -18,7 +18,7 @@ p {
     margin: 0;
     padding: 0;
 }
-canvas#nodelines {
+canvas {
     position: absolute;
     top: 0;
     left: 0;
