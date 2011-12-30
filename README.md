@@ -7,12 +7,6 @@ structure in a graphical interface.
 
 ------------------------
 
-###Next steps:
-* Add controls to resize the entire node map
-* Add split-screen and live update functionality
-
-------------------------
-
 ###How to use:
 1. Load NodeMap as an unpacked extension in Google Chrome
 2. Open any web page, online or offline (demo.html provided)
