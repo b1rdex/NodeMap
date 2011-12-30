@@ -1,12 +1,12 @@
 {
   "name": "NodeMap",
-  "version": "1.0",
-  "author": "Niki Liu",
+  "version": "1.0.1",
   "description": "Map a page's DOM structure in a graphical interface.",
-  "icons": { "128": "icon.png" },
+  "homepage_url": "https://github.com/nikiliu/NodeMap",
+  "icons": { "128": "icon128.png" },
   "background_page": "background.html",
   "permissions": [
-    "tabs", "http://*/*", "https://*/*", "file:///*"
+    "tabs", "http://*/*", "https://*/*"
   ],
   "browser_action": {
     "default_title": "Map this page",

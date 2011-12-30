@@ -8,6 +8,5 @@ structure in a graphical interface.
 ------------------------
 
 ###How to use:
-1. Load NodeMap as an unpacked extension in Google Chrome
-2. Open any web page, online or offline (demo.html provided)
-3. Click the NodeMap icon to display the page's DOM
+1. Download the latest version at https://chrome.google.com/webstore/detail/iobeifjonnigfdobbjchnmanhiebfbba
+2. Or load the unpacked directory as an unpacked extension in Google Chrome.
