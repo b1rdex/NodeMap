@@ -10,6 +10,6 @@
   ],
   "browser_action": {
     "default_title": "Map this page",
-    "default_icon": "icon.png"
+    "default_icon": "icon500.png"
   }
 }
