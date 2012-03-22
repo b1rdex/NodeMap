@@ -11,9 +11,13 @@
 </head>
 <body>
 <script type="text/javascript">
+var nodemaped = false;
 chrome.browserAction.onClicked.addListener(function(tab) {
-    chrome.tabs.executeScript(null, {file: "nodemap.js"});
-    chrome.tabs.insertCSS(null, {file: "nodemap.css"});
+    if (!nodemaped) {
+        nodemaped = true;
+        chrome.tabs.executeScript(null, {file: "nodemap.js"});
+        chrome.tabs.insertCSS(null, {file: "nodemap.css"});
+    }
 });
 </script>
 </body>
