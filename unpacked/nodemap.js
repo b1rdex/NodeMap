@@ -72,6 +72,12 @@ var nodeMap = document.createElement('ul');
 nodeMap.setAttribute('class', 'nodemap');
 nodeMap.innerHTML = mapNodes(rootNode);
 
+// Create the backlink
+var backlink = document.createElement('a');
+backlink.setAttribute('href', 'javascript:window.location.reload()');
+backlink.setAttribute('style', 'position:absolute;left:1em;top:1em;font-size:1.6em;')
+backlink.innerHTML = '← Take me back!';
+
 // Create a canvas that draws lines connecting nodes
 var canvas = document.createElement('canvas');
 var ctx = canvas.getContext('2d');
@@ -82,6 +88,7 @@ document.head.innerHTML = '';
 document.body.innerHTML = '';
 document.body.appendChild(canvas);
 document.body.appendChild(nodeMap);
+document.body.appendChild(backlink);
 
 // Set the dimensions of the canvas to match the node map's.
 setTimeout(function() { // Required for some reason
