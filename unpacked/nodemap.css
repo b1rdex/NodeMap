@@ -44,6 +44,8 @@ ul.nodemap {
     margin: 0 auto;
     padding-top: 2em;
     border-radius: 9999px;
+    box-sizing: content-box;
+      -webkit-box-sizing: content-box;
 }
     .node > .attributes {
         background: #000;
